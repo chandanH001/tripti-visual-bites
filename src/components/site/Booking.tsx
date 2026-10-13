@@ -32,12 +32,12 @@ function buildMessage(f: Form) {
     `📅 তারিখ: ${f.date}`,
     `📍 স্থান: ${f.venue}`,
     `👥 আনুমানিক অতিথি: ${f.guests} জন`,
-    f.menu && `🍛 পছন্দের মেনু: ${f.menu}`,
-    f.budget && `💰 আনুমানিক বাজেট: ${f.budget}`,
-    f.notes && `📝 অতিরিক্ত নির্দেশনা: ${f.notes}`,
+    f.menu ? `🍛 পছন্দের মেনু: ${f.menu}` : null,
+    f.budget ? `💰 আনুমানিক বাজেট: ${f.budget}` : null,
+    f.notes ? `📝 অতিরিক্ত নির্দেশনা: ${f.notes}` : null,
     "",
     "অনুগ্রহ করে মেনু ও মূল্য সম্পর্কে জানাবেন।",
-  ].filter((l) => l !== false && l !== undefined && l !== "" ? true : l === "").join("\n");
+  ].filter((l) => l !== null).join("\n");
 }
 
 const field = "w-full rounded-xl border border-input bg-card px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/25 transition";
