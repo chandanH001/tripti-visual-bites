@@ -270,10 +270,10 @@ export function Gallery() {
       {idx !== null && (
         <div role="dialog" aria-modal="true" aria-label="ছবির গ্যালারি" className="fixed inset-0 z-[70] flex items-center justify-center bg-forest/95 p-4 animate-in fade-in"
           onClick={() => setIdx(null)}
-          onTouchStart={(e) => setTouchX(e.touches[0].clientX)}
-          onTouchEnd={(e) => { if (touchX !== null) { const dx = e.changedTouches[0].clientX - touchX; if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1); } setTouchX(null); }}>
-          <img src={GALLERY[idx].src} alt={GALLERY[idx].alt} className="max-h-[80vh] max-w-full rounded-2xl object-contain shadow-lift" onClick={(e) => e.stopPropagation()} />
-          <p className="absolute bottom-6 left-0 right-0 text-center text-sm text-primary-foreground/80">{GALLERY[idx].alt} · {idx + 1}/{GALLERY.length}</p>
+          onTouchStart={(e) => setTouchX(e.touches[0]!.clientX)}
+          onTouchEnd={(e) => { if (touchX !== null) { const dx = e.changedTouches[0]!.clientX - touchX; if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1); } setTouchX(null); }}>
+          <img src={GALLERY[idx]!.src} alt={GALLERY[idx]!.alt} className="max-h-[80vh] max-w-full rounded-2xl object-contain shadow-lift" onClick={(e) => e.stopPropagation()} />
+          <p className="absolute bottom-6 left-0 right-0 text-center text-sm text-primary-foreground/80">{GALLERY[idx]!.alt} · {idx + 1}/{GALLERY.length}</p>
           <button aria-label="বন্ধ করুন" onClick={() => setIdx(null)} className="absolute right-4 top-4 grid h-12 w-12 place-items-center rounded-full bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/20"><X /></button>
           <button aria-label="আগের ছবি" onClick={(e) => { e.stopPropagation(); go(-1); }} className="absolute left-3 grid h-12 w-12 place-items-center rounded-full bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/20"><ChevronLeft /></button>
           <button aria-label="পরের ছবি" onClick={(e) => { e.stopPropagation(); go(1); }} className="absolute right-3 grid h-12 w-12 place-items-center rounded-full bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/20"><ChevronRight /></button>
@@ -309,7 +309,7 @@ export function Reviews() {
         <p className="-mt-6 mb-10 text-center text-sm"><span className="rounded-full bg-gold/20 px-3 py-1 font-medium text-foreground/80">প্রিভিউ: নিচের মতামতগুলো নমুনা, প্রকৃত রিভিউ নয়</span></p>
         <div className="hidden gap-6 md:grid md:grid-cols-3">{TESTIMONIALS.map((t) => <TestimonialCard key={t.name} t={t} />)}</div>
         <div className="md:hidden">
-          <TestimonialCard t={TESTIMONIALS[i]} />
+          <TestimonialCard t={TESTIMONIALS[i]!} />
           <div className="mt-5 flex items-center justify-center gap-3">
             <button aria-label="আগের রিভিউ" onClick={() => setI((i - 1 + n) % n)} className="grid h-11 w-11 place-items-center rounded-full border text-primary"><ChevronLeft className="h-5 w-5" /></button>
             {TESTIMONIALS.map((_, k) => <span key={k} className={cn("h-2 rounded-full transition-all", k === i ? "w-6 bg-accent" : "w-2 bg-border")} />)}
@@ -428,7 +428,7 @@ export function FloatingActions() {
   useEffect(() => {
     const el = document.getElementById("booking");
     if (!el) return;
-    const io = new IntersectionObserver(([e]) => setHideBar(e.isIntersecting), { threshold: 0.15 });
+    const io = new IntersectionObserver(([e]) => setHideBar(!!e?.isIntersecting), { threshold: 0.15 });
     io.observe(el);
     return () => io.disconnect();
   }, []);
