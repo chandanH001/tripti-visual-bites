@@ -1,13 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
+import { WeeklyMenu } from "@/components/site/WeeklyMenu";
 import { Booking } from "@/components/site/Booking";
 import {
   Hero, Trust, About, MenuSection, Services, Packages, HowItWorks, Gallery, Reviews, Faq, Contact, Footer, FloatingActions,
 } from "@/components/site/Sections";
 
-const TITLE = "খাবারের তৃপ্তি | বিয়ে, অনুষ্ঠান ও কর্পোরেট ক্যাটারিং সার্ভিস";
+const TITLE = "খাবারের তৃপ্তি | প্রতিদিনের খাবার ও ক্যাটারিং সার্ভিস";
 const DESC =
-  "খাবারের তৃপ্তির সঙ্গে আপনার বিয়ে, জন্মদিন, পারিবারিক অনুষ্ঠান ও কর্পোরেট আয়োজনের জন্য পছন্দমতো খাবারের মেনু ও ক্যাটারিং কোটেশন নিন।";
+  "খাবারের তৃপ্তিতে প্রতিদিনের খাবার, সাপ্তাহিক মেনু এবং বিভিন্ন অনুষ্ঠানের ক্যাটারিং সার্ভিস সম্পর্কে জানুন। খাবারের অর্ডার ও কোটেশনের জন্য WhatsApp-এ যোগাযোগ করুন।";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -32,6 +33,8 @@ export const Route = createFileRoute("/")({
           servesCuisine: "Bengali",
           description: DESC,
           areaServed: "Bangladesh",
+          telephone: "+8801347136483",
+          priceRange: "৳130",
         }),
       },
     ],
@@ -46,6 +49,7 @@ function Index() {
       <main>
         <Hero />
         <Trust />
+        <WeeklyMenu />
         <About />
         <MenuSection />
         <Services />

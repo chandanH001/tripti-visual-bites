@@ -42,30 +42,30 @@
 
 :root {
   --radius: 1rem;
-  --background: oklch(0.985 0.015 80);
+  --background: #FFF8ED;
   --foreground: oklch(0.27 0.012 155);
-  --card: oklch(1 0 0);
+  --card: #FFFFFF;
   --card-foreground: oklch(0.27 0.012 155);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.27 0.012 155);
-  --primary: oklch(0.33 0.055 160);
-  --primary-foreground: oklch(0.985 0.015 80);
-  --secondary: oklch(0.48 0.08 158);
-  --secondary-foreground: oklch(0.985 0.015 80);
+  --primary: #07552D;
+  --primary-foreground: #FFFFFF;
+  --secondary: #08783E;
+  --secondary-foreground: #FFFFFF;
   --muted: oklch(0.955 0.02 80);
   --muted-foreground: oklch(0.45 0.02 155);
-  --accent: oklch(0.65 0.15 42);
+  --accent: #F47716;
   --accent-foreground: oklch(1 0 0);
   --gold: oklch(0.76 0.12 80);
-  --cream: oklch(0.985 0.015 80);
-  --forest: oklch(0.26 0.045 160);
+  --cream: #FFF8ED;
+  --forest: #053F21;
   --whatsapp: oklch(0.72 0.19 150);
   --whatsapp-foreground: oklch(1 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(1 0 0);
   --border: oklch(0.9 0.025 80);
   --input: oklch(0.88 0.025 80);
-  --ring: oklch(0.65 0.15 42);
+  --ring: #F47716;
 
   --gradient-hero: radial-gradient(1200px 600px at 85% -10%, color-mix(in oklab, var(--gold) 28%, transparent), transparent 60%),
     radial-gradient(800px 500px at -10% 110%, color-mix(in oklab, var(--accent) 14%, transparent), transparent 60%);

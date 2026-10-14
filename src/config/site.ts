@@ -17,26 +17,45 @@ export const SITE = {
   name: "খাবারের তৃপ্তি",
   nameEn: "KHABARER TRIPTI",
   tagline: "প্রতিটি আয়োজনে, স্বাদের তৃপ্তি।",
-  // PLACEHOLDER — international format, no "+" or spaces
-  whatsappNumber: "8801XXXXXXXXX",
-  phone: "+880 1XXX-XXXXXX", // PLACEHOLDER
-  phoneHref: "tel:+8801XXXXXXXXX", // PLACEHOLDER
-  email: "info@example.com", // PLACEHOLDER
-  address: "ব্যবসার ঠিকানা এখানে লিখুন", // PLACEHOLDER
-  hours: "ব্যবসার সময়সূচি এখানে লিখুন", // PLACEHOLDER
-  facebook: "#", // PLACEHOLDER
-  instagram: "#", // PLACEHOLDER
+  whatsappNumber: "8801347136483",
+  whatsappDisplay: "01347136483",
+  whatsappTel: "tel:+8801347136483",
+  // Empty string = "not provided yet"; the site shows a neutral notice instead of fake data.
+  phone: "", // PLACEHOLDER e.g. "01XXXXXXXXX"
+  email: "", // PLACEHOLDER
+  address: "", // PLACEHOLDER
+  deliveryArea: "", // PLACEHOLDER
+  hours: "", // PLACEHOLDER
+  facebook: "", // PLACEHOLDER — full Facebook page URL
+  instagram: "", // PLACEHOLDER
   googleMapsEmbed: "", // PLACEHOLDER — paste Google Maps embed URL
   googleReviewUrl: "", // PLACEHOLDER — Google review link
 };
 
+export const NOT_SET = "শীঘ্রই যুক্ত করা হবে";
+export const callHref = () => (SITE.phone ? `tel:${SITE.phone.replace(/[^\d+]/g, "")}` : SITE.whatsappTel);
+
+/** Daily meal price in Taka — confirmed by the business. Do not change without permission. */
+export const MEAL_PRICE = 130;
+
+const SIDES = ["সবজি", "ভাজি", "ডাল", "সালাদ"];
+export const WEEKLY_MENU = [
+  { day: "শনিবার", jsDay: 6, main: "মাছ", items: ["মাছ", ...SIDES], image: "fish" },
+  { day: "রবিবার", jsDay: 0, main: "গরুর মাংস", items: ["গরুর মাংস", ...SIDES], image: "beef" },
+  { day: "সোমবার", jsDay: 1, main: "সোনালি / দেশি মুরগি", items: ["সোনালি মুরগি বা দেশি মুরগি", ...SIDES], image: "chicken" },
+  { day: "মঙ্গলবার", jsDay: 2, main: "বড় মাছ", items: ["বড় মাছ", ...SIDES], image: "fish" },
+  { day: "বুধবার", jsDay: 3, main: "সোনালি মুরগি ও ভর্তা", items: ["সোনালি মুরগি", "ভর্তা", "ভাজি", "ডাল", "সালাদ"], image: "bhorta" },
+  { day: "বৃহস্পতিবার", jsDay: 4, main: "গরুর মাংস", items: ["গরুর মাংস", ...SIDES], image: "beef" },
+  { day: "শুক্রবার", jsDay: 5, main: "চিকেন বিরিয়ানি", items: ["চিকেন বিরিয়ানি", "ডিম", "ভাজি", "সালাদ"], image: "biryani" },
+];
+
 export const NAV = [
   { id: "home", label: "হোম" },
   { id: "about", label: "আমাদের সম্পর্কে" },
-  { id: "menu", label: "খাবারের মেনু" },
+  { id: "weekly", label: "সাপ্তাহিক মেনু" },
+  { id: "menu", label: "ক্যাটারিং মেনু" },
   { id: "services", label: "ক্যাটারিং সার্ভিস" },
-  { id: "packages", label: "প্যাকেজ" },
-  { id: "reviews", label: "কাস্টমার রিভিউ" },
+    { id: "reviews", label: "কাস্টমার রিভিউ" },
   { id: "contact", label: "যোগাযোগ" },
 ];
 
@@ -107,9 +126,9 @@ export const GALLERY = [
 
 /** SAMPLE testimonials — preview only. Replace with real customer reviews. */
 export const TESTIMONIALS = [
-  { name: "নমুনা গ্রাহক ১", rating: 5, text: "এখানে আসল গ্রাহকের মতামত বসানো হবে। খাবারের স্বাদ ও পরিবেশনা নিয়ে গ্রাহকের অভিজ্ঞতা।", date: "" },
-  { name: "নমুনা গ্রাহক ২", rating: 5, text: "এটি একটি নমুনা রিভিউ। প্রকৃত রিভিউ পাওয়া গেলে এই লেখাটি পরিবর্তন করুন।", date: "" },
-  { name: "নমুনা গ্রাহক ৩", rating: 5, text: "নমুনা মতামত — আয়োজনের অভিজ্ঞতা সম্পর্কে গ্রাহকের প্রকৃত কথা এখানে থাকবে।", date: "" },
+  { name: "নমুনা গ্রাহক ১", rating: 0, text: "এখানে আসল গ্রাহকের মতামত বসানো হবে। খাবারের স্বাদ ও পরিবেশনা নিয়ে গ্রাহকের অভিজ্ঞতা।", date: "" },
+  { name: "নমুনা গ্রাহক ২", rating: 0, text: "এটি একটি নমুনা রিভিউ। প্রকৃত রিভিউ পাওয়া গেলে এই লেখাটি পরিবর্তন করুন।", date: "" },
+  { name: "নমুনা গ্রাহক ৩", rating: 0, text: "নমুনা মতামত — আয়োজনের অভিজ্ঞতা সম্পর্কে গ্রাহকের প্রকৃত কথা এখানে থাকবে।", date: "" },
 ];
 
 export const FAQS = [
