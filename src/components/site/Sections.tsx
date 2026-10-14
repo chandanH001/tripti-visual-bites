@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 import {
   ChefHat, PartyPopper, SlidersHorizontal, MessageCircle, CheckCircle2, ArrowRight, Star,
-  ChevronLeft, ChevronRight, X, Phone, Mail, MapPin, Clock, Plus, Facebook, Instagram, Sparkles, UtensilsCrossed, CalendarCheck, ClipboardList,
+  ChevronLeft, ChevronRight, X, Phone, Mail, MapPin, Clock, Plus, Facebook, Instagram, Sparkles, UtensilsCrossed, CalendarCheck, ClipboardList, Truck,
 } from "lucide-react";
-import { SITE, MENU, MENU_CATEGORIES, SERVICES, PACKAGES, GALLERY, TESTIMONIALS, FAQS, NAV, images } from "@/config/site";
-import { waLink, waFood, waService, waPackage } from "@/lib/whatsapp";
+import { SITE, NOT_SET, callHref, MENU, MENU_CATEGORIES, SERVICES, PACKAGES, GALLERY, TESTIMONIALS, FAQS, NAV, images } from "@/config/site";
+import { waLink, waFood, waService, waPackage, waOrderGeneral } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
 import { Reveal, SectionHeading, WaIcon, btn, Logo } from "./ui";
 
@@ -20,21 +20,21 @@ export function Hero() {
       <div className={cn(wrap, "relative grid items-center gap-12 lg:grid-cols-[1.05fr_1fr]")}>
         <Reveal>
           <p className="inline-flex items-center gap-2 rounded-full border border-gold/50 bg-card/70 px-4 py-1.5 text-sm font-medium text-primary backdrop-blur">
-            <Sparkles className="h-4 w-4 text-gold" /> আপনার প্রতিটি আয়োজনের বিশ্বস্ত সঙ্গী
+            <Sparkles className="h-4 w-4 text-gold" /> প্রতিদিনের খাবার ও ক্যাটারিং সার্ভিস
           </p>
           <h1 className="mt-6 text-[2.6rem] font-bold leading-[1.15] text-primary sm:text-6xl lg:text-[4.2rem]">
             স্বাদে ঐতিহ্য,<br /><span className="text-accent">আয়োজনে তৃপ্তি!</span>
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-            বিয়ে, জন্মদিন, পারিবারিক অনুষ্ঠান কিংবা কর্পোরেট আয়োজন—আপনার বিশেষ মুহূর্তকে আরও সুস্বাদু করে তুলতে রয়েছে খাবারের তৃপ্তির বিশেষ ক্যাটারিং ব্যবস্থা।
+            প্রতিদিন ঘরোয়া স্বাদের পূর্ণ খাবার মাত্র ৳১৩০-এ। পাশাপাশি বিয়ে, জন্মদিন, পারিবারিক ও কর্পোরেট আয়োজনের জন্য রয়েছে পছন্দমতো ক্যাটারিং ব্যবস্থা।
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <a href="#booking" className={btn.primary}>ক্যাটারিং বুক করুন <ArrowRight className="h-4 w-4" /></a>
-            <a href="#menu" className={btn.outline}>খাবারের মেনু দেখুন</a>
-            <a href={waLink()} {...ext} className={btn.wa}><WaIcon /> WhatsApp-এ কথা বলুন</a>
+            <a href="#weekly" className={btn.accent}>আজকের মেনু দেখুন <ArrowRight className="h-4 w-4" /></a>
+            <a href={waOrderGeneral()} {...ext} className={btn.wa}><WaIcon /> WhatsApp-এ অর্ডার</a>
+            <a href="#booking" className={btn.outline}>ক্যাটারিং বুক করুন</a>
           </div>
           <ul className="mt-10 grid gap-3 text-sm font-medium text-foreground/80 sm:grid-cols-3">
-            {["যত্নসহকারে খাবার প্রস্তুত", "বিভিন্ন অনুষ্ঠানের ক্যাটারিং", "আপনার প্রয়োজন অনুযায়ী মেনু"].map((t) => (
+            {["প্রতি মিল ৳১৩০", "সাপ্তাহিক ঘরোয়া মেনু", "অনুষ্ঠানের ক্যাটারিং"].map((t) => (
               <li key={t} className="flex items-center gap-2"><CheckCircle2 className="h-5 w-5 shrink-0 text-secondary" /> {t}</li>
             ))}
           </ul>
@@ -45,7 +45,7 @@ export function Hero() {
             className="relative aspect-[4/4.4] w-full rounded-[2rem] object-cover shadow-lift" />
           <div className="absolute -bottom-6 left-4 right-4 flex items-center gap-3 rounded-2xl bg-card/95 p-4 shadow-lift backdrop-blur sm:left-auto sm:right-6 sm:w-72">
             <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-accent/15 text-accent"><UtensilsCrossed className="h-6 w-6" /></span>
-            <div className="min-w-0"><p className="font-bold text-primary">পছন্দমতো মেনু</p><p className="text-sm text-muted-foreground">আপনার বাজেট অনুযায়ী সাজানো</p></div>
+            <div className="min-w-0"><p className="font-bold text-primary">প্রতিদিনের মিল ৳১৩০</p><p className="text-sm text-muted-foreground">ডেলিভারি চার্জ আলাদা</p></div>
           </div>
         </Reveal>
       </div>
@@ -130,7 +130,7 @@ export function MenuSection() {
   return (
     <section id="menu" className="bg-muted/60 py-20 md:py-28">
       <div className={wrap}>
-        <SectionHeading eyebrow="মেনু" title="আমাদের খাবারের মেনু" subtitle="আপনার পছন্দের খাবারে সাজিয়ে নিন বিশেষ আয়োজন।" />
+        <SectionHeading eyebrow="মেনু" title="ক্যাটারিং খাবারের মেনু" subtitle="অনুষ্ঠানের জন্য পছন্দের খাবার বেছে নিন — মূল্য অতিথির সংখ্যা ও মেনু অনুযায়ী।" />
         <div role="tablist" aria-label="খাবারের ক্যাটাগরি" className="-mx-4 mb-10 flex gap-2 overflow-x-auto px-4 pb-2 sm:mx-0 sm:flex-wrap sm:justify-center sm:px-0">
           {MENU_CATEGORIES.map((c) => (
             <button key={c} role="tab" aria-selected={cat === c} onClick={() => setCat(c)}
@@ -287,9 +287,11 @@ export function Gallery() {
 function TestimonialCard({ t }: { t: (typeof TESTIMONIALS)[number] }) {
   return (
     <figure className="flex h-full flex-col rounded-3xl border bg-card p-7 shadow-soft">
-      <div className="flex gap-1 text-gold" aria-label={`${t.rating} তারকা`}>
-        {Array.from({ length: 5 }).map((_, i) => <Star key={i} className={cn("h-5 w-5", i < t.rating && "fill-current")} />)}
-      </div>
+      {t.rating > 0 ? (
+        <div className="flex gap-1 text-gold" aria-label={`${t.rating} তারকা`}>
+          {Array.from({ length: 5 }).map((_, i) => <Star key={i} className={cn("h-5 w-5", i < t.rating && "fill-current")} />)}
+        </div>
+      ) : <span className="w-fit rounded-full bg-muted px-3 py-1 text-xs font-semibold text-muted-foreground">নমুনা রিভিউ</span>}
       <blockquote className="mt-4 flex-1 text-lg leading-relaxed text-foreground/85">“{t.text}”</blockquote>
       <figcaption className="mt-6 flex items-center gap-3">
         <span className="grid h-11 w-11 place-items-center rounded-full bg-primary font-bold text-gold">{t.name.charAt(0)}</span>
@@ -358,10 +360,13 @@ export function Faq() {
 /* ---------------- CONTACT ---------------- */
 export function Contact() {
   const rows = [
-    { icon: Phone, l: "ফোন", v: SITE.phone, href: SITE.phoneHref },
-    { icon: Mail, l: "ইমেইল", v: SITE.email, href: `mailto:${SITE.email}` },
-    { icon: MapPin, l: "ঠিকানা", v: SITE.address },
-    { icon: Clock, l: "সময়সূচি", v: SITE.hours },
+    { icon: MessageCircle, l: "WhatsApp", v: SITE.whatsappDisplay, href: waLink() },
+    { icon: Phone, l: "ফোন", v: SITE.phone || NOT_SET, href: SITE.phone ? callHref() : undefined },
+    { icon: Mail, l: "ইমেইল", v: SITE.email || NOT_SET, href: SITE.email ? `mailto:${SITE.email}` : undefined },
+    { icon: MapPin, l: "ঠিকানা", v: SITE.address || NOT_SET },
+    { icon: Truck, l: "ডেলিভারি এলাকা", v: SITE.deliveryArea || NOT_SET },
+    { icon: Clock, l: "সময়সূচি", v: SITE.hours || NOT_SET },
+    { icon: Facebook, l: "Facebook পেজ", v: SITE.facebook ? "পেজ দেখুন" : NOT_SET, href: SITE.facebook || undefined },
   ];
   return (
     <section id="contact" className="py-20 md:py-28">
@@ -373,7 +378,7 @@ export function Contact() {
               <li key={l} className="rounded-2xl border bg-card p-5">
                 <I className="h-5 w-5 text-accent" />
                 <p className="mt-3 text-sm text-muted-foreground">{l}</p>
-                {href ? <a href={href} className="font-en break-words font-semibold text-primary hover:text-accent">{v}</a> : <p className="font-semibold text-primary">{v}</p>}
+                {href ? <a href={href} {...(href.startsWith("http") ? ext : {})} className="font-en break-words font-semibold text-primary hover:text-accent">{v}</a> : <p className={cn("font-semibold", v === NOT_SET ? "text-muted-foreground" : "text-primary")}>{v}</p>}
               </li>
             ))}
           </ul>
@@ -399,21 +404,21 @@ export function Contact() {
 
 /* ---------------- FOOTER ---------------- */
 export function Footer() {
-  const quick = NAV.filter((n) => ["home", "about", "menu", "services", "contact"].includes(n.id));
+  const quick = NAV.filter((n) => ["home", "weekly", "menu", "services", "contact"].includes(n.id));
   return (
     <footer className="bg-forest pb-28 pt-16 text-primary-foreground/80 md:pb-10">
       <div className={cn(wrap, "grid gap-10 sm:grid-cols-2 lg:grid-cols-4")}>
         <div><Logo light /><p className="mt-4">{SITE.tagline}</p>
           <div className="mt-5 flex gap-3">
-            <a href={SITE.facebook} aria-label="Facebook" {...ext} className="grid h-10 w-10 place-items-center rounded-full bg-primary-foreground/10 hover:bg-accent"><Facebook className="h-5 w-5" /></a>
-            <a href={SITE.instagram} aria-label="Instagram" {...ext} className="grid h-10 w-10 place-items-center rounded-full bg-primary-foreground/10 hover:bg-accent"><Instagram className="h-5 w-5" /></a>
+            {SITE.facebook && <a href={SITE.facebook} aria-label="Facebook" {...ext} className="grid h-10 w-10 place-items-center rounded-full bg-primary-foreground/10 hover:bg-accent"><Facebook className="h-5 w-5" /></a>}
+            {SITE.instagram && <a href={SITE.instagram} aria-label="Instagram" {...ext} className="grid h-10 w-10 place-items-center rounded-full bg-primary-foreground/10 hover:bg-accent"><Instagram className="h-5 w-5" /></a>}
             <a href={waLink()} aria-label="WhatsApp" {...ext} className="grid h-10 w-10 place-items-center rounded-full bg-primary-foreground/10 hover:bg-whatsapp"><WaIcon /></a>
           </div>
         </div>
         <div><h3 className="mb-4 font-bold text-gold">দ্রুত লিংক</h3><ul className="space-y-2">{quick.map((q) => <li key={q.id}><a href={`#${q.id}`} className="hover:text-gold">{q.label}</a></li>)}</ul></div>
         <div><h3 className="mb-4 font-bold text-gold">আমাদের সেবা</h3><ul className="space-y-2">{["বিয়ে ও বিবাহের আয়োজন", "জন্মদিনের ক্যাটারিং", "পারিবারিক অনুষ্ঠান", "কর্পোরেট ক্যাটারিং"].map((s) => <li key={s}><a href="#services" className="hover:text-gold">{s}</a></li>)}</ul></div>
         <div><h3 className="mb-4 font-bold text-gold">যোগাযোগ</h3>
-          <ul className="space-y-2"><li><a href={SITE.phoneHref} className="font-en hover:text-gold">{SITE.phone}</a></li><li>{SITE.address}</li><li><a href={SITE.facebook} {...ext} className="hover:text-gold">Facebook পেজ</a></li></ul>
+          <ul className="space-y-2"><li>WhatsApp: <a href={waLink()} {...ext} className="font-en hover:text-gold">{SITE.whatsappDisplay}</a></li>{SITE.phone && <li><a href={callHref()} className="font-en hover:text-gold">{SITE.phone}</a></li>}{SITE.address && <li>{SITE.address}</li>}{SITE.facebook && <li><a href={SITE.facebook} {...ext} className="hover:text-gold">Facebook পেজ</a></li>}</ul>
           <a href={waLink()} {...ext} className={cn(btn.wa, "mt-4")}><WaIcon /> WhatsApp</a>
         </div>
       </div>
@@ -435,14 +440,14 @@ export function FloatingActions() {
   return (
     <>
       <a href={waLink()} {...ext} aria-label="WhatsApp-এ চ্যাট করুন"
-        className={cn("fixed bottom-6 right-5 z-40 h-14 w-14 place-items-center rounded-full bg-whatsapp text-whatsapp-foreground shadow-lift transition hover:scale-110", "hidden md:grid")}>
+        className={cn("fixed bottom-6 right-5 z-40 h-14 w-14 place-items-center rounded-full bg-whatsapp text-whatsapp-foreground shadow-lift transition hover:scale-110", "grid bottom-24 md:bottom-6")}>
         <span className="absolute inset-0 animate-ping rounded-full bg-whatsapp opacity-30" aria-hidden />
         <WaIcon className="relative h-7 w-7" />
       </a>
       <nav aria-label="দ্রুত যোগাযোগ" className={cn("fixed inset-x-3 bottom-3 z-40 grid grid-cols-3 gap-2 rounded-2xl border bg-background/95 p-2 shadow-lift backdrop-blur transition-transform duration-300 md:hidden", hideBar && "translate-y-[150%]")}>
-        <a href={SITE.phoneHref} className="flex min-h-12 flex-col items-center justify-center rounded-xl text-xs font-semibold text-primary"><Phone className="h-5 w-5" />ফোন করুন</a>
+        <a href={callHref()} className="flex min-h-12 flex-col items-center justify-center rounded-xl text-xs font-semibold text-primary"><Phone className="h-5 w-5" />ফোন করুন</a>
         <a href={waLink()} {...ext} className="flex min-h-12 flex-col items-center justify-center rounded-xl bg-whatsapp text-xs font-bold text-whatsapp-foreground"><WaIcon />WhatsApp</a>
-        <a href="#booking" className="flex min-h-12 flex-col items-center justify-center rounded-xl text-xs font-semibold text-primary"><CalendarCheck className="h-5 w-5" />বুকিং</a>
+        <a href="#weekly" className="flex min-h-12 flex-col items-center justify-center rounded-xl bg-accent text-xs font-bold text-accent-foreground"><CalendarCheck className="h-5 w-5" />অর্ডার</a>
       </nav>
     </>
   );
