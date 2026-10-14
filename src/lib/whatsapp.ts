@@ -4,7 +4,7 @@ export const DEFAULT_WA_MESSAGE =
   "আসসালামু আলাইকুম, আমি খাবারের তৃপ্তির খাবার ও ক্যাটারিং সার্ভিস সম্পর্কে জানতে চাই।";
 
 const BN_DIGITS = "০১২৩৪৫৬৭৮৯";
-export const bn = (n: number | string) => String(n).replace(/\d/g, (d) => BN_DIGITS[Number(d)]);
+export const bn = (n: number | string) => String(n).replace(/\d/g, (d) => BN_DIGITS[Number(d)] ?? d);
 
 export function waLink(message: string = DEFAULT_WA_MESSAGE) {
   return `https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent(message)}`;
